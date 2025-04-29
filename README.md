@@ -41,3 +41,105 @@ Conecte o TextField para ageTextField
 Conecte o Label para resultLabel
 
 Conecte a ação do botão para calculateButtonPressed
+
+import SwiftUI
+
+
+
+struct ContentView: View {
+
+    @State private var username: String = ""
+
+    @State private var password: String = ""
+
+    @State private var isPasswordVisible: Bool = false
+
+
+
+    var body: some View {
+
+        VStack {
+
+            Spacer()
+
+
+
+            VStack(spacing: 20) {
+
+                TextField("Digite o nome de usuário", text: $username)
+
+                    .padding()
+
+                    .cornerRadius(10)
+
+                    .frame(width: 250)
+
+
+
+                ZStack(alignment: .trailing) {
+
+                    Group {
+
+                        if isPasswordVisible {
+
+                            TextField("Digite sua senha", text: $password)
+
+                        } else {
+
+                            SecureField("Digite sua senha", text: $password)
+
+                        }
+
+                    }
+
+                    .keyboardType(.numberPad)
+
+                    .padding()
+
+                    .cornerRadius(10)
+
+                    .frame(width: 250)
+
+
+
+                    Button(action: {
+
+                        isPasswordVisible.toggle()
+
+                    }) {
+
+                        Image(systemName: isPasswordVisible ? "eye.slash.fill" : "eye.fill")
+
+                            .foregroundColor(.black)
+
+                            .padding(.trailing, 15)
+
+                    }
+
+                }
+
+            }
+
+            .padding(.bottom, 40)
+
+        }
+
+        .frame(maxHeight: .infinity, alignment: .bottom)
+
+        .ignoresSafeArea(.keyboard, edges: .bottom)
+
+    }
+
+}
+
+
+
+struct ContentView_Previews: PreviewProvider {
+
+    static var previews: some View {
+
+        ContentView()
+
+    }
+
+}
